@@ -1,6 +1,6 @@
 
 <?php
-session_start();
+
 require_once ("conexion/conexion.php");
 
 ?>
@@ -19,33 +19,7 @@ require_once ("conexion/conexion.php");
       $id_rol= 2;
 	  $id_nivel= 1; 
 
-      $sql = $con -> prepare ("SELECT * FROM usuario where id_usuario='$id_usuario'");
-      $sql -> execute();
-      $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
-      
-    
-    
-      if($id_usuario=="" || $nombre=="" || $id_tipo_cargo=="" || $id_estado=="" || $correo=="" || $contrasena=="" || $nit_empresa=="")
-      {
-        echo '<script>alert ("EXISTEN CAMPOS VACIOS"); </script>';
-        echo '<script>window.location="usuario.php"</script>';
-      }
-      else if($fila){
-        echo '<script>alert ("USUARIO YA REGISTRADO"); </script>';
-        echo '<script>window.location="usuario.php"</script>';
-      }
-
-            
-      else
-      {
-        $password=password_hash($contrasena,PASSWORD_DEFAULT,array("pass"=>12));
-        $insertSQL = $con->prepare ("INSERT INTO usuario(id_usuario,nombre,id_tipo_cargo,id_estado,correo,id_tipo_usuario,contrasena,nit_empresa) 
-        VALUES ('$id_usuario','$nombre', '$id_tipo_cargo', '$id_estado', '$correo', '$id_tipo_usuario', '$pass_cifrado','$nit_empresa')");
-        $insertSQL->execute();
-        echo '<script>alert ("Usuario Creado con Exito"); </script>';
-        echo '<script>window.location="usuario.php"</script>';
-      }
-    }
+	}
 
 ?>
 
@@ -91,9 +65,10 @@ require_once ("conexion/conexion.php");
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>						
-                        <select name="sexo" class="form-control"  id="sexo" >
-							
-						</select>
+                        <select id="avatar" name="avatar" required ">
+						
+                            
+                        </select>
 						
 					</div>
 
@@ -102,7 +77,7 @@ require_once ("conexion/conexion.php");
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>						
                         <select name="avatar" class="form-control"  id="sexo" >
-							<option value="">seleciones avatar</option>
+							
 						</select>						
 					</div>
 

@@ -3,7 +3,7 @@ class Database
 {
     private $hostname = "localhost";
 
-    private $database = "brawl_stars";
+    private $database = "bralw_stars";
 
     private $username = "root";
 
