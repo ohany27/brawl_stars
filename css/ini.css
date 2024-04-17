@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: radial-gradient(ellipse at center, #655574 0%, #000000 85%);
+    background: radial-gradient(ellipse at center, #41156b 0%, #000000 85%);
     font-family: 'Varela Round', sans-serif;
 }
 
