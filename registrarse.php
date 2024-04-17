@@ -1,8 +1,32 @@
+
+<?php
+
+require_once ("conexion/conexion.php");
+
+?>
+
+<?php
+    if ((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="formreg"))
+    {
+      $username= $_POST['usuario'];
+      $contrasena= $_POST['contrasena'];
+	  $correo= $_POST['correo'];
+	  $id_avatar= $_POST['avatar'];
+	  $id_sexo= $_POST['sexo'];
+	  $puntaje= 0;
+      $vida= 100;	  
+      $id_estado= 1;
+      $id_rol= 2;
+	  $id_nivel= 1; 
+
+	}
+
+?>
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,48 +52,48 @@
 
             <!--Formulario de registro-->
 			<div class="card-body">
-				<form>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-						<input type="text" class="form-control" placeholder="Nombre">
-						
-					</div>
+				<form method="post">
+	
                     <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Usuario">
-						
+						<input type="text" name="usuario" class="form-control" placeholder="Usuario">						
 					</div>
+
                     <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>						
-                        <select name="" class="form-control"  id="" ></select>
+                        <select id="avatar" name="avatar" required ">
+						
+                            
+                        </select>
 						
 					</div>
+
                     <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>						
-                        <select name="" class="form-control"  id="" ></select>						
+                        <select name="avatar" class="form-control"  id="sexo" >
+							
+						</select>						
 					</div>
 
                     <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Correo">
+						<input type="text" name="correo" class="form-control" placeholder="Correo">
 						
 					</div>
+
                     <div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Contraseña">
-						
+						<input type="text" name="contrasena" class="form-control" placeholder="Contraseña">	
 					</div>
 					
 					<div class="form-group">
@@ -80,9 +104,7 @@
 
 
 			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="#">Sign Up</a>
-				</div>
+				
 				<div class="d-flex justify-content-center">
 					<a href="#">Forgot your password?</a>
 				</div>
