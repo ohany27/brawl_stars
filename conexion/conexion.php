@@ -1,36 +1,17 @@
 <?php
-class Database
-{
-    private $hostname = "localhost";
+// Establecer la conexión a la base de datos
+$servername = "localhost";
+$database = "brawl_stars";
+$username = "root";
+$password = "";
 
-    private $database = "bralw_stars";
-
-    private $username = "root";
-
-    private $password = "";
-
-    private $chasrset = "utf8";
-
-
-
-function conectar()
-{
-    try{
-    $conexion = "mysql:host=". $this->hostname . ";dbname=" . $this->database . ";charset=" . $this->chasrset ; 
-    $option = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_EMULATE_PREPARES => false
-    ];
-
-    $pdo = new PDO($conexion, $this->username, $this->password, $option);
-
-    return $pdo;
-    }
-    catch(PDOException $e)
-    {
-        echo 'Error de Conexion: ' . $e->getMessage();
-        exit;
-    }
-    }
+try {
+    $con = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+    // Establecer el modo de error de PDO a excepción
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    // Si hay un error en la conexión, muestra un mensaje de error
+    echo "Error de conexión: " . $e->getMessage();
 }
 ?>
+

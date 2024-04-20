@@ -1,56 +1,58 @@
+<?php
 
-<!doctype html>
+require_once("conexion/conexion.php");
+
+?>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/ini.css">
+    <title>Inicio Sesión</title>
+</head>
+<body>
+    <div class="formulario">
+        <h1>Bienvenido</h1>
+        <form method="post" action="" id="formulario">
+            <div class="campos">
+                <input type="text" name="username" id="username" >
+                <label>Username</label>
+            </div>
+            <div class="campos">
+                <input type="password" name="password" id="password">
+                <label>Contraseña</label>
+            </div>
+            <div class="campos">
+            <select class="campos" name="id_estado">
+				<?php
+				$control = $con->prepare("SELECT id_avatar FROM avatar ");
+				$control->execute();
+				while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
+					echo "<option value='" . $fila['id_avatar'] . "'>" . $fila['foto'] . "</option>";
+				}
+				?>
+			</select>
+            </div>
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
-
-    <body>
-        <header>
-            <!-- place navbar here -->
-        </header>
-        <main>
-
-            <select class="form-control" name="sexo">
-                <?php
-                $control = $con->prepare("SELECT * FROM sexo");
-                $control->execute();
-                while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<option value='" . $fila['id_sexo'] . "'>" . $fila['nombre'] . "</option>";
-                }
-                ?>
-            </select>
-
-
-        </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+            <div class="recordar"><a href="#">Olvido su contraseña?</a></div>
+            <input type="submit" name="inicio" value="Iniciar Sesión">
+            <br><br>
+        </form>
+    </div>
+</body>
 </html>

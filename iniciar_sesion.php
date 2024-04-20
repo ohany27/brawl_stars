@@ -13,13 +13,13 @@
 <body>
     <div class="formulario">
         <h1>Bienvenido</h1>
-        <form method="post" action="" id="formulario">
+        <form method="post"  action="controller/inicio.php" id="formulario">
             <div class="campos">
                 <input type="text" name="username" id="username" >
                 <label>Username</label>
             </div>
             <div class="campos">
-                <input type="password" name="password" id="password">
+                <input type="password" name="contrasena" id="contrasena">
                 <label>Contraseña</label>
             </div>
             <div class="recordar"><a href="#">Olvido su contraseña?</a></div>

@@ -1,7 +1,3 @@
-CREATE TABLE `sexo` (
-  `id_sexo` INT PRIMARY KEY,
-  `nombre` VARCHAR(255)
-);
 
 CREATE TABLE `niveles` (
   `id_nivel` INT PRIMARY KEY,
@@ -38,8 +34,7 @@ CREATE TABLE `avatar` (
   `id_avatar` INT PRIMARY KEY,
   `nombre` VARCHAR(255),
   `foto` VARCHAR(255),
-  `id_sexo` INT,
-  FOREIGN KEY (`id_sexo`) REFERENCES `sexo` (`id_sexo`)
+
 );
 
 CREATE TABLE `usuarios` (
@@ -49,12 +44,11 @@ CREATE TABLE `usuarios` (
   `correo` VARCHAR(255),
   `puntaje` INT,
   `vida` INT,
-  `id_sexo` INT,
   `id_estado` INT,
   `id_rol` INT,
   `id_nivel` INT,
   `id_avatar` INT,
-  FOREIGN KEY (`id_sexo`) REFERENCES `sexo` (`id_sexo`),
+  
   FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id_estado`),
   FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`),
   FOREIGN KEY (`id_nivel`) REFERENCES `niveles` (`id_nivel`),
