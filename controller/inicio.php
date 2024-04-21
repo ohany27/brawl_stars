@@ -35,7 +35,7 @@ try {
 
                     // Iniciar sesión y guardar el ID de usuario y el tipo de usuario en variables de sesión
                     session_start();
-                    $_SESSION["id_usuario"] = $ID;
+                    $_SESSION["username"] = $ID;
                     $_SESSION["id_rol"] = $ID_Roll;
 
                     // Redireccionar según el tipo de usuario

@@ -1,13 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['ID'])) {
+if (!isset($_SESSION['username'])) {
     echo '
  <script>
         alert("Por favor inicie sesión e intente nuevamente");
         window.location = "../login.html";
     </script>
     ';
-    session_destroy();
-    die();
+    
 }
 ?>
