@@ -48,18 +48,19 @@
             <div class="menu">
                 <h4>Opciones</h4>
                 <ul>
-                    <li>
-                        <a href="mapas.php">
+                    <a href="mapas.php">
+                        <li>    
                             <img src="../../img/mapas.jpg">
                             <p>Mapas</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="personajes.php">
-                            <img src="../../img/brawlers.png">
-                            <p>Personajes</p>
-                        </a>
-                    </li>
+                        </li>
+                    </a>
+
+                    <a href="personajes.php">
+                        <li>
+                                <img src="../../img/brawlers.png">
+                                <p>Personajes</p>
+                        </li>
+                    </a>
                     <li>
                         <a href="armas.php">
                             <img src="../../img/armas.png">

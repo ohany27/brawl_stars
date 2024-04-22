@@ -38,7 +38,7 @@
                 <div class="box">
                     <img src="../../img/puño2.png" alt="">
                     <div class="overlay">
-                        <h3>ABATIDOR</h3>
+                        <h3>LA BATIDORA</h3>
                         <i class="fa-solid fa-fire"><span> 300</span></i>
                         <i class="fa-solid fa-person-rifle"><span> 15</span></i>
                     </div>
@@ -60,7 +60,7 @@
                 <div class="box">
                     <img src="../../img/pistol1.png" alt="">
                     <div class="overlay">
-                        <h3>PERDIGONES</h3>
+                        <h3>PERDIGON</h3>
                         <i class="fa-solid fa-fire"><span> 300</span></i>
                         <i class="fa-solid fa-person-rifle"><span> 15</span></i>
                     </div>
@@ -136,7 +136,7 @@
                 <div class="box">
                     <img src="../../img/franco3.png" alt="">
                     <div class="overlay">
-                        <h3>VICVACPORNHUB</h3>
+                        <h3>VICVACPORNHUD</h3>
                         <i class="fa-solid fa-fire"><span> 300</span></i>
                         <i class="fa-solid fa-person-rifle"><span> 15</span></i>
                     </div>
