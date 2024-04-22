@@ -1,7 +1,11 @@
 <?php
 
 require_once("conexion/conexion.php");
+// Crear una instancia de la clase Database
+$database = new Database();
 
+// Obtener la conexión PDO
+$con = $database->getConnection();
 ?>
 
 <?php
@@ -13,7 +17,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
 	$puntaje = 0;
 	$vida = 100;
 	$id_estado = 1;
-	$id_rol = 1;
+	$id_rol = 2;
 	$id_nivel = 1;
 
 
@@ -77,12 +81,14 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
 			<div class="campos">
 				<select class="campos" name="avatar">
 					<?php
-					$control = $con->prepare("SELECT * FROM avatar ");
+					$control = $con->prepare("SELECT id_avatar, nombre FROM avatar");
 					$control->execute();
 					while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
-						echo "<option  value='" . $fila['id_avatar'] . "'>" . $fila['nombre'] . "</option>";
+						echo "<option value='" . $fila['id_avatar'] . "'>" . $fila['nombre'] . "</option>";
 					}
 					?>
+
+
 				</select>
 			</div>
 			<input type="submit" name="validar" value="Registrarse">

@@ -1,13 +1,43 @@
 <?php
-
 require_once("../../conexion/conexion.php");
-
-// Crear una instancia de la clase Database
 $database = new Database();
-
-// Obtener la conexión a la base de datos
+$db = new Database();
 $con = $database->getConnection();
 
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
+	$username = $_POST['usuario'];
+	$contrasena = $_POST['contrasena'];
+	$correo = $_POST['correo'];
+	$id_avatar = $_POST['avatar'];
+	$puntaje = 0;
+	$vida = 100;
+	$id_estado = 1;
+	$id_rol = 2;
+	$id_nivel = 1;
+
+
+
+	$sql = $con->prepare("SELECT * FROM usuarios where username='$username'");
+	$sql->execute();
+	$fila = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+	if ($username == "" || $contrasena == "" || $correo == "" || $id_avatar == "") {
+		echo '<script>alert ("Completa el formulario"); </script>';
+		echo '<script>window.location="registrarse.php"</script>';
+	} else if ($fila) {
+		echo '<script>alert ("USUARIO YA REGISTRADO"); </script>';
+		echo '<script>window.location="usuario.php"</script>';
+	} else {
+		$password = password_hash($contrasena, PASSWORD_DEFAULT, array("pass" => 12));
+		$insertSQL = $con->prepare("INSERT INTO usuarios(username,contrasena,correo,puntaje,vida,id_estado,id_rol,id_nivel,id_avatar) 
+	  VALUES ('$username','$password', '$correo', '$puntaje', '$vida', '$id_estado', '$id_rol','$id_nivel','$id_avatar')");
+		$insertSQL->execute();
+		echo '<script>alert ("Usuario Creado con Exito"); </script>';
+		echo '<script>window.location="usuarios.php"</script>';
+	}
+}
 
 
 
@@ -38,22 +68,38 @@ $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <?php include("nav.php") ?>
     <div class="container-fluid row">
-        <form class="col-4 p-3">
+        <form class="col-4 p-3" method="post">
             <h3 class="text-center text-secondary">Registrar Jugador</h3>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="usuario" class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" name="usuario" id="usuario">
+
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="correo" class="form-label">Correo</label>
+                <input type="email" class="form-control" name="correo" id="exampleInputEmail1">
+
             </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <div class="mb-3">
+                <label for="contrasena" class="form-label">Contraseña</label>
+                <input type="password" name="contrasena" class="form-control" id="exampleInputPassword1">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+            <label for="avatar" class="form-label">Avatar</label>
+                <select class="form-control" name="avatar">
+                    <?php
+                    $control = $con->prepare("SELECT id_avatar, nombre FROM avatar");
+                    $control->execute();
+                    while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<option value='" . $fila['id_avatar'] . "'>" . $fila['nombre'] . "</option>";
+                    }
+                    ?>
+
+                </select>
+            </div>
+
+            <input type="submit" class="btn btn-primary" name="validar" value="Registrarse">
+            <input type="hidden" name="MM_insert" value="formreg">
         </form>
 
 
@@ -79,8 +125,8 @@ $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo $fila['nombre_nivel']; ?></td>
                             <td><?php echo $fila['estado']; ?></td>
                             <td>
-                            <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-user-xmark"></i></a>
+                                <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-user-xmark"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

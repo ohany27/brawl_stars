@@ -4,31 +4,37 @@ require_once("../../conexion/conexion.php");
 $db = new Database();
 $con = $db->getConnection();
 
-$query = $con->prepare("SELECT niveles.nombre_nivel,niveles.puntos_requeridos FROM niveles");
+$query = $con->prepare("SELECT armas.nombre_arma, armas.dano, armas.imagen_arma, niveles.nombre_nivel 
+FROM armas 
+JOIN niveles ON armas.id_nivel = niveles.id_nivel
+");
 $query->execute();
 $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 
     $nombre = $_POST['nombre'];
-    $puntos = $_POST['puntos'];
+    $dano = $_POST['dano'];
+    $foto = $_POST['foto'];
+    $nivel = $_POST['nivel'];
 
-    $sql = $con->prepare("SELECT * FROM niveles where nombre_nivel='$nombre'");
+    $sql = $con->prepare("SELECT * FROM armas where nombre_arma='$nombre'");
 	$sql->execute();
 	$fila = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($nombre == "" || $puntos == "") {
+    if ($nombre == "" || $dano == "" || $foto == "") {
 		echo '<script>alert ("Datos Vacios"); </script>';
-		echo '<script>window.location="niveles.php"</script>';
+		echo '<script>window.location="armas.php"</script>';
 	} else if ($fila) {
-		echo '<script>alert ("NIVEL YA REGISTRADO"); </script>';
-		echo '<script>window.location="niveles.php"</script>';
+		echo '<script>alert ("ARMA YA REGISTRADA"); </script>';
+		echo '<script>window.location="armas.php"</script>';
 	} else {
 		
-		$insertSQL = $con->prepare("INSERT INTO niveles (nombre_nivel,puntos_requeridos) 
-	  VALUES ('$nombre','$puntos')");
+		$insertSQL = $con->prepare("INSERT INTO armas (nombre_arma,dano,imagen_arma,id_nivel) 
+	  VALUES ('$nombre','$dano','$foto','$nivel')");
 		$insertSQL->execute();
-		echo '<script>window.location="niveles.php"</script>';
+        echo '<script>alert ("REGISTRO EXITOSO"); </script>';
+		echo '<script>window.location="armas.php"</script>';
 	}
 
 };
@@ -49,17 +55,36 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
     <?php include("nav.php") ?>
     <div class="container-fluid row">
         <form class="col-4 p-3" method="post">
-            <h3 class="text-center text-secondary">Registrar Niveles</h3>
+            <h3 class="text-center text-secondary">Registrar Armas</h3>
             <div class="mb-3">
-                <label for="usuario" class="form-label">Nombre del Nivel</label>
-                <input type="text" class="form-control" name="nombre" id="usuario">
+                <label for="usuario" class="form-label">Arma</label>
+                <input type="text" class="form-control" name="nombre">
 
             </div>
             <div class="mb-3">
-                <label for="foto" class="form-label">Puntos Requerido</label>
-                <input type="text" class="form-control" name="puntos">
+                <label for="foto" class="form-label">Daño</label>
+                <input type="text" class="form-control" name="dano">
 
             </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label">Img</label>
+                <input type="file" class="form-control" name="foto">
+
+            </div>
+            <div class="mb-3">
+                <label for="foto" class="form-label">Nivel</label>
+                <select class="form-control" name="nivel">
+                    <?php
+                    $control = $con->prepare("SELECT id_nivel, nombre_nivel FROM niveles");
+                    $control->execute();
+                    while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<option value='" . $fila['id_nivel'] . "'>" . $fila['nombre_nivel'] . "</option>";
+                    }
+                    ?>
+
+                </select>
+            </div>
+
             <input type="submit" class="btn btn-primary" name="validar" value="Registrarse">
             <input type="hidden" name="MM_insert" value="formreg">
         </form>
@@ -69,15 +94,19 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
                 <thead class="bg-info">
                     <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Puntos</th>
-                        <th scope="col"> </th>
+                        <th scope="col">Daño</th>
+                        <th scope="col">Nivel</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($resultados as $fila) : ?>
                         <tr>
+                            <td><?php echo $fila['nombre_arma']; ?></td>
+                            <td><?php echo $fila['dano']; ?></td>
+                            <td><?php echo $fila['imagen_arma']; ?></td>
                             <td><?php echo $fila['nombre_nivel']; ?></td>
-                            <td><?php echo $fila['puntos_requeridos']; ?></td>
 
                             <td>
                                 <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
