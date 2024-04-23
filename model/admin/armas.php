@@ -46,7 +46,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niveles</title>
+    <title>Armas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/1057b0ffdd.js" crossorigin="anonymous"></script>
 </head>

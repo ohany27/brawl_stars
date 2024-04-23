@@ -12,7 +12,8 @@
         <a class="nav-link" href="mundos.php">Mundos</a>
         <a class="nav-link" href="niveles.php">Niveles</a>
         <a class="nav-link" href="armas.php">Armas</a>
-        <a class="nav-link" href="estado.php">Estados & Roles</a>
+        <a class="nav-link" href="estado.php">Estados</a>
+        <a class="nav-link" href="roles.php">Roles</a>
       </div>
     </div>
   </div>
