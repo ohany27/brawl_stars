@@ -11,13 +11,24 @@ $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 
     $nombre = $_POST['nombre'];
-    $foto = $_POST['foto'];
+
+    $foto = $_FILES['foto']['name']; 
+    $foto_temp = $_FILES['foto']['tmp_name'];
+    $foto_destino = "../../img_bd/" . $foto;
+
+    $foto_personaje = $_FILES['personaje']['name']; 
+    $foto_temp_personaje = $_FILES['personaje']['tmp_name'];
+    $foto_destino_personaje = "../../img_bd/" . $foto_personaje;
+    
+
+    move_uploaded_file($foto_temp, $foto_destino);
+    move_uploaded_file($foto_temp_personaje, $foto_destino_personaje);
 
     $sql = $con->prepare("SELECT * FROM avatar where nombre='$nombre'");
 	$sql->execute();
 	$fila = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($nombre == "" || $foto == "") {
+    if ($nombre == "" || $foto_destino == ""|| $foto_destino_personaje == "") {
 		echo '<script>alert ("Datos Vacios"); </script>';
 		echo '<script>window.location="avatar.php"</script>';
 	} else if ($fila) {
@@ -25,8 +36,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 		echo '<script>window.location="avatar.php"</script>';
 	} else {
 		
-		$insertSQL = $con->prepare("INSERT INTO avatar (nombre,foto) 
-	  VALUES ('$nombre','$foto')");
+		$insertSQL = $con->prepare("INSERT INTO avatar (nombre,foto,personaje) 
+	    VALUES ('$nombre','$foto_destino', '$foto_destino_personaje')");
 		$insertSQL->execute();
 		echo '<script>window.location="avatar.php"</script>';
 	}
@@ -55,7 +66,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 <body>
     <?php include("nav.php") ?>
     <div class="container-fluid row">
-        <form class="col-4 p-3" method="post">
+        <form class="col-4 p-3" method="post" enctype="multipart/form-data">
             <h3 class="text-center text-secondary">Registrar Avatar</h3>
             <div class="mb-3">
                 <label for="usuario" class="form-label">Nombre del Avatar</label>
@@ -65,7 +76,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
             <div class="mb-3">
                 <label for="foto" class="form-label">Imagen</label>
                 <input type="file" class="form-control" name="foto" >
-
+            </div>
+            <div class="mb-3">
+                <label for="personaje" class="form-label">Personaje</label>
+                <input type="file" class="form-control" name="personaje" >
             </div>
             <input type="submit" class="btn btn-primary" name="validar" value="Registrarse">
             <input type="hidden" name="MM_insert" value="formreg">
@@ -76,15 +90,20 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
                     <tr>
                         <th scope="col">Nombre</th>                       
                         <th scope="col">Foto</th>
-                        <th scope="col"> </th>
+                        <th scope="col">Personaje</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($resultados as $fila) : ?>
                         <tr>
                             <td><?php echo $fila['nombre']; ?></td>
-                            <td><?php echo $fila['foto']; ?></td>
-                            
+                            <td>
+                                <img src="<?php echo $fila['foto']; ?>"  style="max-width: 100px;">
+                            </td>
+                            <td>
+                                <img src="<?php echo $fila['personaje']; ?>"  style="max-width: 100px;">
+                            </td>
                             <td>
                                 <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-user-xmark"></i></a>

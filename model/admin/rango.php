@@ -4,14 +4,13 @@ require_once("../../conexion/conexion.php");
 $db = new Database();
 $con = $db->getConnection();
 
-
-$query = $con->prepare("SELECT mundos.nombre_mundo,mundos.foto FROM mundos");
+$query = $con->prepare("SELECT rango.nombre_ran, rango.imagen_ran FROM rango");
 $query->execute();
 $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
 
-if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 
-    $nombre = $_POST['nombre'];
+    $rango = $_POST['rango'];
 
     $foto = $_FILES['foto']['name']; 
     $foto_temp = $_FILES['foto']['tmp_name'];
@@ -19,27 +18,26 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
 
     move_uploaded_file($foto_temp, $foto_destino);
 
-    $sql = $con->prepare("SELECT * FROM mundos where nombre_mundo='$nombre'");
-    $sql->execute();
-    $fila = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $sql = $con->prepare("SELECT * FROM rango where nombre_ran ='$rango'");
+	$sql->execute();
+	$fila = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($nombre == "" || $foto_destino == "") {
-        echo '<script>alert ("Datos Vacios"); </script>';
-        echo '<script>window.location="mundos.php"</script>';
-    } else if ($fila) {
-        echo '<script>alert ("MUNDO YA REGISTRADO"); </script>';
-        echo '<script>window.location="mundos.php"</script>';
-    } else {
+    if ($rango == "" || $foto_destino == "") {
+		echo '<script>alert ("Datos Vacios"); </script>';
+		echo '<script>window.location="armas.php"</script>';
+	} else if ($fila) {
+		echo '<script>alert ("ARMA YA REGISTRADA"); </script>';
+		echo '<script>window.location="armas.php"</script>';
+	} else {
+		
+		$insertSQL = $con->prepare("INSERT INTO rango (nombre_ran,imagen_ran) 
+	    VALUES ('$rango','$foto_destino')");
+		$insertSQL->execute();
+        echo '<script>alert ("REGISTRO EXITOSO"); </script>';
+		echo '<script>window.location="rango.php"</script>';
+	}
 
-        $insertSQL = $con->prepare("INSERT INTO mundos (nombre_mundo,foto) 
-	    VALUES ('$nombre','$foto_destino')");
-        $insertSQL->execute();
-        echo '<script>window.location="mundos.php"</script>';
-    }
 };
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +46,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundos</title>
+    <title>Rango</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/1057b0ffdd.js" crossorigin="anonymous"></script>
 </head>
@@ -57,36 +55,34 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
     <?php include("nav.php") ?>
     <div class="container-fluid row">
         <form class="col-4 p-3" method="post" enctype="multipart/form-data">
-            <h3 class="text-center text-secondary">Registrar Avatar</h3>
+            <h3 class="text-center text-secondary">Registrar Rangos</h3>
             <div class="mb-3">
-                <label for="usuario" class="form-label">Mundo</label>
-                <input type="text" class="form-control" name="nombre">
+                <label for="rango" class="form-label">Rango</label>
+                <input type="text" class="form-control" name="rango">
 
             </div>
-            <div class=" mb-3">
-                <label for="foto" class="form-label">Imagen</label>
-                <input type="file" class="form-control" name="foto">
-
+            <div class="mb-3">
+                <label for="foto" class="form-label">Imagen de Rango</label>
+                <input type="file" class="form-control" name="foto" accept="image">
             </div>
             <input type="submit" class="btn btn-primary" name="validar" value="Registrarse">
             <input type="hidden" name="MM_insert" value="formreg">
         </form>
+        
         <div class="col-8 p-4">
             <table class="table">
                 <thead class="bg-info">
                     <tr>
-                        <th scope="col">Mundo</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col"> </th>
+                        <th scope="col">Rango</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($resultados as $fila) : ?>
                         <tr>
-                            <td><?php echo $fila['nombre_mundo']; ?></td>
-                            <td><img src="<?php echo $fila['foto']; ?>" alt="Foto del Mundo" style="max-width: 100px;"></td>
-
-
+                            <td><?php echo $fila['nombre_ran']; ?></td>
+                            <td><img src="<?php echo $fila['imagen_ran']; ?>" style="max-width: 100px;"></td>
                             <td>
                                 <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-user-xmark"></i></a>

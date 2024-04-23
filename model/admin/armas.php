@@ -15,14 +15,19 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 
     $nombre = $_POST['nombre'];
     $dano = $_POST['dano'];
-    $foto = $_POST['foto'];
     $nivel = $_POST['nivel'];
+
+    $foto = $_FILES['foto']['name']; 
+    $foto_temp = $_FILES['foto']['tmp_name'];
+    $foto_destino = "../../img_bd/" . $foto;
+
+    move_uploaded_file($foto_temp, $foto_destino);
 
     $sql = $con->prepare("SELECT * FROM armas where nombre_arma='$nombre'");
 	$sql->execute();
 	$fila = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($nombre == "" || $dano == "" || $foto == "") {
+    if ($nombre == "" || $dano == "" || $foto_destino == "") {
 		echo '<script>alert ("Datos Vacios"); </script>';
 		echo '<script>window.location="armas.php"</script>';
 	} else if ($fila) {
@@ -31,7 +36,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 	} else {
 		
 		$insertSQL = $con->prepare("INSERT INTO armas (nombre_arma,dano,imagen_arma,id_nivel) 
-	  VALUES ('$nombre','$dano','$foto','$nivel')");
+	  VALUES ('$nombre','$dano','$foto_destino','$nivel')");
 		$insertSQL->execute();
         echo '<script>alert ("REGISTRO EXITOSO"); </script>';
 		echo '<script>window.location="armas.php"</script>';
@@ -54,7 +59,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
 <body>
     <?php include("nav.php") ?>
     <div class="container-fluid row">
-        <form class="col-4 p-3" method="post">
+        <form class="col-4 p-3" method="post" enctype="multipart/form-data">
             <h3 class="text-center text-secondary">Registrar Armas</h3>
             <div class="mb-3">
                 <label for="usuario" class="form-label">Arma</label>
@@ -68,7 +73,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
             </div>
             <div class="mb-3">
                 <label for="foto" class="form-label">Img</label>
-                <input type="file" class="form-control" name="foto">
+                <input type="file" class="form-control" name="foto" accept="image">
 
             </div>
             <div class="mb-3">
@@ -95,8 +100,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Daño</th>
-                        <th scope="col">Nivel</th>
                         <th scope="col">Imagen</th>
+                        <th scope="col">Nivel</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -105,7 +110,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
                         <tr>
                             <td><?php echo $fila['nombre_arma']; ?></td>
                             <td><?php echo $fila['dano']; ?></td>
-                            <td><?php echo $fila['imagen_arma']; ?></td>
+                            <td>
+                                <img src="<?php echo $fila['imagen_arma']; ?>" alt="Imagen del arma" style="max-width: 100px;">
+                            </td>
+
                             <td><?php echo $fila['nombre_nivel']; ?></td>
 
                             <td>

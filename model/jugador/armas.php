@@ -90,7 +90,7 @@
                 <div class="box">
                     <img src="../../img/ametra1.png" alt="">
                     <div class="overlay">
-                        <h3>MI/AK/LIFA</h3>
+                        <h3>GATLING</h3>
                         <i class="fa-solid fa-fire"><span> 300</span></i>
                         <i class="fa-solid fa-person-rifle"><span> 15</span></i>
                     </div>
@@ -98,7 +98,7 @@
                 <div class="box">
                     <img src="../../img/ametra2.png" alt="">
                     <div class="overlay">
-                        <h3>KILO DE LIMON</h3>
+                        <h3>LIBRA DE LIMON</h3>
                         <i class="fa-solid fa-fire"><span> 300</span></i>
                         <i class="fa-solid fa-person-rifle"><span> 15</span></i>
                     </div>
@@ -106,7 +106,7 @@
                 <div class="box">
                     <img src="../../img/ametra3.png" alt="">
                     <div class="overlay">
-                        <h3>MATA LLORONES</h3>
+                        <h3>KILO 141</h3>
                         <i class="fa-solid fa-fire"><span> 300</span></i>
                         <i class="fa-solid fa-person-rifle"><span> 15</span></i>
                     </div>
@@ -136,7 +136,7 @@
                 <div class="box">
                     <img src="../../img/franco3.png" alt="">
                     <div class="overlay">
-                        <h3>VICVACPORNHUD</h3>
+                        <h3>VIC MAC</h3>
                         <i class="fa-solid fa-fire"><span> 300</span></i>
                         <i class="fa-solid fa-person-rifle"><span> 15</span></i>
                     </div>

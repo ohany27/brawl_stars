@@ -17,7 +17,7 @@
         <header>
             <div class="perfil">
                 <div class="avatar">
-                    <img src="../../img/icono_jugador.webp" alt="Avatar" class="img_per">
+                    <img src="../../img/icono_bull.webp" alt="Avatar" class="img_per">
                     <p>Nombre</p>
                 </div>
                 <div class="info" >

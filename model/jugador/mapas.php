@@ -26,7 +26,7 @@
 
             <div class="swiper-slide">
                 <img src="../../img/aguas_turbulentas.webp" alt="">
-                <h2 class="card__title">AGUAS TURBULENTAS</h2>
+                <h2 class="card__title">AGUAS LENTAS</h2>
 
             </div>
 
@@ -37,7 +37,7 @@
 
             <div class="swiper-slide">
                 <img src="../../img/cueva_subterranea.webp" alt="">
-                <h2 class="card__title">CUEVA SUBTERRANEA</h2>
+                <h2 class="card__title">CUEVA LUNAR</h2>
             </div>
 
             <div class="swiper-slide">
@@ -57,7 +57,7 @@
 
             <div class="swiper-slide">
                 <img src="../../img/tiroteo_escolar.webp" alt="">
-                <h2 class="card__title">TIROTEO ESCOLAR</h2>
+                <h2 class="card__title">TIROTEO ESTELAR</h2>
             </div>
 
             <div class="swiper-slide">
