@@ -19,11 +19,10 @@ body{
 /* ********************************** */
 
 .navbar {
-    padding: 30px 0; 
+    padding: 80px 0; 
     display: flex;
     justify-content: center;
     align-items: center; 
-    margin-bottom: -40px;
 }
 
 .title-container {
@@ -45,7 +44,8 @@ body{
     font-size: 50px;
     color: #ffad00;
     -webkit-text-stroke: 2px black;
-    margin-top: -15px; 
+    margin-top: -15px;
+    margin-bottom: 20px; 
 }
 
 /* ********************************** */
@@ -53,8 +53,7 @@ body{
 /* ********************************** */
 
 .swiper{
-    height: 1100px;
-   
+    height: 980px;
 }
 
 .swiper-wrapper {
@@ -62,8 +61,7 @@ body{
     justify-content: center;
     align-items: center;
     margin-top: -100px;
-    
-    
+    margin-bottom: -250px;
 }
   
 .swiper-slide {
@@ -74,14 +72,12 @@ body{
     height: 750px;
     position: relative;
     align-items: center;
-    
 }
 
 .swiper-slide img {
     width: 680px;
     border-radius: 15px;
     height: 750px;
-  
 }
 
 @media(max-width:991px) {
@@ -112,11 +108,10 @@ body{
 
 .container .box-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 250px;
-    column-gap: 230px;
-    margin-top: -930px;
-    margin-left: 75px;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    gap: 270px;
+    column-gap: 898px;
+    margin-top: -870px;
     z-index: 1;
 }
 
@@ -133,6 +128,7 @@ body{
     height: 100px;
     position: relative;
     z-index: 1;
+    margin-left: -90px;
     
 }
 
@@ -185,7 +181,7 @@ body{
 .formulario{
     border: 3px solid rgb(0, 0, 0);
     position: absolute;
-    top: 180%;
+    top: 105%;
     left: 50%;
     transform: translate(-50%,-50%);
     width: 400px;
@@ -280,5 +276,3 @@ input[type="submit"]:hover{
     border-color: #41156b;
     transition: .5s;
 }
-
-

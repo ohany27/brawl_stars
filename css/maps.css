@@ -122,9 +122,10 @@ body {
 
 .button-container {
     position: absolute;
-    bottom: 10px; /* Cambié el valor de -40% a 10px */
-    left: 50%; /* Centra horizontalmente el botón */
-    transform: translateX(-50%); /* Centra horizontalmente el botón */
+    bottom: 1px; 
+    left: 95%;
+    transform: translateX(-20%);
+    transform: translateY(-130%);
 }
 
 .btn-primary {
@@ -146,6 +147,8 @@ body {
     background-color: rgb(206, 181, 43);
     border-color: rgb(206, 181, 43);
 }
+
 #volver{
-    transform: translate(0px, 50px);
+    padding: 8px 35px;
+    transform: skew(-20deg);
 }

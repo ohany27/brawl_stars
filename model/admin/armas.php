@@ -6,8 +6,7 @@ $con = $db->getConnection();
 
 $query = $con->prepare("SELECT armas.nombre_arma, armas.dano, armas.imagen_arma, niveles.nombre_nivel 
 FROM armas 
-JOIN niveles ON armas.id_nivel = niveles.id_nivel
-");
+JOIN niveles ON armas.id_nivel = niveles.id_nivel");
 $query->execute();
 $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -117,9 +116,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")){
                             <td><?php echo $fila['nombre_nivel']; ?></td>
 
                             <td>
-                                <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="editar/edit_arm.php?id_arma=<?php echo $fila['id_arma']; ?>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-user-xmark"></i></a>
                             </td>
+
                         </tr>
                     <?php endforeach; ?>
 

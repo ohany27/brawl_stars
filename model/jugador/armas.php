@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once("../../conexion/conexion.php");
+$db = new Database();
+$con = $db->getConnection();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +27,9 @@
         <div class="title-container">
             <h1>HERRAMIENTAS</h1>
             <h3 class="subtitle">ARMAS</h3>
+        </div>
+        <div class="button-container">
+            <a href="index.php"><button type="button" class="btn btn-primary diagonal">VOLVER</button></a>
         </div>
     </nav>
 
@@ -145,12 +156,6 @@
         </div>
 
     </div>
-
-
-    <div class="button-container">
-        <a href="index.php"><button type="button" class="btn btn-primary diagonal">VOLVER</button></a>
-    </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="../../js/script.js" ></script>

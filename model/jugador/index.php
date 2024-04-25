@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once("../../conexion/conexion.php");
+$db = new Database();
+$con = $db->getConnection();
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +25,7 @@
         <header>
             <div class="perfil">
                 <div class="avatar">
-                    <img src="../../img/icono_bull.webp" alt="Avatar" class="img_per">
+                    <img src="<?php echo $user['foto']; ?>" alt="Avatar" class="img_per">
                     <p>Nombre</p>
                 </div>
                 <div class="info" >

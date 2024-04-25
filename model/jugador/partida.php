@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once("../../conexion/conexion.php");
+$db = new Database();
+$con = $db->getConnection();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +22,7 @@
 </head>
 <body>
     
+<div class="joa">
     <nav class="navbar container">
         <div class="title-container">
             <h1>ATRAPAGEMAS</h1>
@@ -52,7 +61,7 @@
                     </div>
                 </div>
             </div>
-
+        
             <div class="box">
                 <div class="imgbx">
                     <img src="../../img/brawlers.png">
@@ -98,14 +107,11 @@
                 <option value="">Seleccione jugador</option>
                 </select>
             </div>
-
-
-
             <input type="submit" name="inicio" value="Atacar">
             <br><br>
         </form>
     </div>
-    
+</div>
              
         
 </body>

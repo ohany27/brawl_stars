@@ -47,6 +47,9 @@ $conn->close();
             <h1>DESAFÍO</h1>
             <h3 class="subtitle">MAPAS</h3>
         </div>
+        <div class="button-container">
+            <a href="index.php"><button type="button" class="btn btn-primary diagonal" id="volver">VOLVER</button></a>
+        </div>
     </nav>
 
     <div class="swiper mySwiper container">
@@ -68,17 +71,10 @@ $conn->close();
                         <input type="hidden" name="id_usuario" value="1">
                         <button type="submit" class="btn btn-primary diagonal">Unirse sala</button>
                     </form>
-                   
-                   
-
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="button-container">
-        <a href="index.php"><button type="button" class="btn btn-primary diagonal" id="volver">VOLVER</button></a>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="../../js/script.js"></script>
 </body>
